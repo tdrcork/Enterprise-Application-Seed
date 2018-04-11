@@ -1,0 +1,33 @@
+<mat-toolbar fxLayout
+  fxLayoutAlign="center center"
+  class="header">
+
+    <div fxFlex routerLink="/">
+        <button mat-button><h1>CAMERON SEED</h1></button>
+    </div>
+
+    <div fxFlex></div>
+
+    <div fxHide.gt-xs>
+        <button mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+
+    <div fxHide.lt-sm>
+        <a routerLinkActive="active" mat-button>
+        text</a>
+
+        <a routerLinkActive="active" mat-button>
+        text</a>
+
+        <a routerLinkActive="active" mat-button>
+        text</a>
+
+        <a routerLinkActive="active" color="primary" mat-raised-button>
+        text</a>
+    </div>
+
+</mat-toolbar>
+
+
