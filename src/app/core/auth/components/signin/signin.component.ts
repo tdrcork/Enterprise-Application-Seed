@@ -12,4 +12,10 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit() {
+    const username = this.form.value.username
+    const password = this.form.value.password
+    this.authService.login(username, password);
+  }
+
 }
