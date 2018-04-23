@@ -3,127 +3,52 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 /* My Files/Modules/Services */
-import { environment, cognitoCredentials } from '@env/environment';
-import { UIService } from '@app/core';
 
 /* Special */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import Amplify, { Auth } from 'aws-amplify';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+
+/* ngrx */
+import * as fromAuth from '../ngrx/auth.effects';
+import * as fromApp from '../../ngrx/app.reducer';
+import { AmplifyService } from 'aws-amplify-angular';
+import { Auth } from 'aws-amplify';
 
 
 @Injectable()
-export class AuthService {
+export class CognitoService {
+
+  token: string;
 
   constructor(
     private router:  Router,
-    private uiService: UIService,
-    private store: Store<fromRoot.State>,
-  ) { Amplify.configure(cognitoCredentials); }
-
-  registerUser(username: string, password: string, email: string) {
-    this.store.dispatch(new UI.StartLoading());
-    Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email
-      },
-      validationData: []
-    })
-    .then(data => {
-      this.store.dispatch(new UI.StopLoading());
-      this.store.dispatch(new userState.SetNewUser());
-      this.uiService.showSnackbar(data.message, null, 5000);
-      // user must be confirmed through email before they are confirmed in AWS
-      this.router.navigate(['/confirm']);
-    })
-    .catch(err => {
-      this.store.dispatch(new UI.StopLoading());
-      this.uiService.showSnackbar(err.message, null, 5000);
-    });
-  }
-
-  confirmNewUser(username: string, code: string) {
-    this.store.dispatch(new UI.StartLoading());
-    Auth.confirmSignUp(username, code)
-    .then(data => {
-      this.store.dispatch(new UI.StopLoading());
-      this.store.dispatch(new userState.SetConfirmedUser());
-      this.uiService.showSnackbar(data.message, null, 5000);
-    })
-    .catch(err => {
-      this.store.dispatch(new UI.StopLoading());
-      this.uiService.showSnackbar(err.message, null, 5000);
-    });
-  }
-
-  login(username: string, password: string) {
-    this.store.dispatch(new UI.StartLoading());
-    Auth.signIn(username, password)
-    .then(data => {
-      this.store.dispatch(new UI.StopLoading());
-      this.store.dispatch(new userState.SetConfirmedUser());
-      this.uiService.showSnackbar(data.message, null, 5000);
-    })
-    .catch(err => {
-      this.store.dispatch(new UI.StopLoading());
-      this.uiService.showSnackbar(err.message, null, 5000);
-    });
-  }
+    private amplifyService: AmplifyService,
+    private store: Store<fromApp.State>,
+  ) { this.amplifyService.auth = Auth; }
 
   logout() {
-    this.store.dispatch(new UI.StartLoading());
     Auth.signOut()
-    .then(data => {
-      this.store.dispatch(new UI.StopLoading());
-      this.store.dispatch(new userState.SetNoUser());
-      this.uiService.showSnackbar('You have Logged Out', null, 5000);
-      this.router.navigate(['/']);
-    })
-    .catch(err => {
-      this.store.dispatch(new UI.StopLoading());
-      this.store.dispatch(new userState.SetNoUser());
-      this.uiService.showSnackbar(err.message, null, 5000);
-    });
-  }
-
-  setState() { // broken
-    Auth.currentSession()
-    .then(session => {
-      this.store.dispatch(new userState.SetNewUser());
-      Auth.currentAuthenticatedUser()
-      .then(data => {
-        this.store.dispatch(new userState.SetConfirmedUser());
-      })
-      .catch(err => {
-        this.router.navigate(['/confirm']);
-      });
-    })
-    .catch(err => this.store.dispatch(new userState.SetNoUser()));
-  }
-  
-
-  sendResetPasswordEmail(username: string) {
-    Auth.forgotPassword(username)
-      .then(data => this.uiService.showSnackbar(data, null, 5000))
-      .catch(err => this.uiService.showSnackbar(err, null, 5000));
   }
 
   resetPasswordSubmit(username, code, newPassword) {
-    Auth.forgotPasswordSubmit(username, code, newPassword)
-      .then(data => this.uiService.showSnackbar(data, null, 5000))
-      .catch(err => this.uiService.showSnackbar(err, null, 5000));
+    Auth.forgotPasswordSubmit(username, code, newPassword);
   }
 
   setNewPassword(user, oldPassword, newPassword) {
-    Auth.forgotPasswordSubmit(user, oldPassword, newPassword)
-    .then(data => this.uiService.showSnackbar(data, null, 5000))
-    .catch(err => this.uiService.showSnackbar(err, null, 5000));
+    Auth.forgotPasswordSubmit(user, oldPassword, newPassword);
   }
 
-  getSessionTokens() {
-    return Auth.currentSession();
+  sendMFAcode(user, code, mfaType=null) {
+    Auth.confirmSignIn(user, code, mfaType)
   }
+
+  getUserInfo(attribute) {
+    this.info = fromPromise(Auth.currentUserInfo().then((data) => data.attribute));
+  } // TODO:  make sure that this code works, set up the variable to keep it.
+
+  // TODO: SEE WHAT THE OUTPUTS ARE FOR EACH OF THE METHODS HERE.
+
+
 
 }

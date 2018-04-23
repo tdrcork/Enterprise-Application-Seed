@@ -12,6 +12,15 @@ import { FooterComponent } from './core/navigation/footer/footer.component';
 import { SharedModule } from './core/shared/shared.module';
 import { StaticModule } from './pages/static/static.module';
 
+/* NGRX */
+import { AuthModule } from '../app/core/auth/auth.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './core/auth/ngrx/auth.effects';
+
+/* AWS */
+import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +31,12 @@ import { StaticModule } from './pages/static/static.module';
     BrowserModule,
     AppRoutingModule,
     StaticModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot({reducers}),
+    EffectsModule.forRoot([AuthEffects]),
+    AmplifyAngularModule
   ],
-  providers: [],
+  providers: [AmplifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

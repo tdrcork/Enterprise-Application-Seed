@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import * as fromApp from './core/ngrx/app.reducer';
+import * as fromAuth from './core/auth/ngrx/auth.reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +14,13 @@ import { Component } from '@angular/core';
   `
 })
 export class AppComponent {
+  authState: Observable<fromAuth.State>;
+
+  constructor(private cogitoService: CognitoService,
+              private store: Store<fromApp.AppState>) { }
+
+  ngOnInit() {
+    this.store.select('auth');
+  }
 
 }

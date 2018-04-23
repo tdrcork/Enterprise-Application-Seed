@@ -1,0 +1,70 @@
+<mat-toolbar fxLayout fxLayoutAlign="center center" class="page-title" color="primary">
+  <h1 class="mat-headline">Sign Up</h1>
+</mat-toolbar>
+
+<div class="side-panel">
+
+</div>
+
+<div class="main-content">
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" fxLayout fxLayoutAlign="center center">
+    <div fxFlex fxLayout="column" fxLayoutAlign="center stretch">
+
+      <mat-form-field fxFlex> <!-- username -->
+          <input matInput
+            type="text"
+            id="username"
+            name="username"
+            ngModel
+            placeholder="username"
+            required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex> <!-- email -->
+        <input matInput
+          type="text"
+          id="email"
+          name="email"
+          ngModel
+          placeholder="email"
+          required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex> <!-- password -->
+        <input matInput
+          type="password"
+          id="password"
+          name="password"
+          ngModel
+          placeholder="password"
+          required>
+      </mat-form-field>
+
+      <div fxFlex> <!-- submit / forgot password -->
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-button>I forgot my password</button>
+      </div>
+
+    </div>
+  </form>
+
+  <div *ngIf="false">
+    <h2>An email has been sent with a confirmation code.</h2>
+    <form>
+      <mat-form-field fxFlex>
+        <input mat-input
+          type="password"
+          id="code"
+          name="code"
+          ngModel
+          placeholder="Confirmation Code"
+          required>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+
+<div class="side-panel">
+
+</div>
+
