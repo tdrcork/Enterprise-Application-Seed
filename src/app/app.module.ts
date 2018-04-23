@@ -12,14 +12,22 @@ import { FooterComponent } from './core/navigation/footer/footer.component';
 import { SharedModule } from './core/shared/shared.module';
 import { StaticModule } from './pages/static/static.module';
 
-/* NGRX */
+/* Authentication */
 import { AuthModule } from '../app/core/auth/auth.module';
+import { AuthEffects } from './core/auth/ngrx/auth.effects';
+
+/* NGRX */
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './core/auth/ngrx/auth.effects';
+import { reducers } from './core/ngrx/app.reducer';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 /* AWS */
 import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
+
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,11 +40,12 @@ import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
     AppRoutingModule,
     StaticModule,
     SharedModule,
-    StoreModule.forRoot({reducers}),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    StoreRouterConnectingModule
   ],
-  providers: [AmplifyService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

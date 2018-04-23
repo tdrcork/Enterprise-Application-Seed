@@ -13,11 +13,10 @@ import { Store } from '@ngrx/store';
   <app-footer></app-footer>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   authState: Observable<fromAuth.State>;
 
-  constructor(private cogitoService: CognitoService,
-              private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.store.select('auth');

@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from '@app/core';
+import { SharedModule } from '../../core/shared/shared.module';
 
-import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
-import {AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
-
-import * as fromApp from '../ngrx/app.reducer';
 
 @NgModule({
   imports: [
     CommonModule,
-    AmplifyAngularModule
+    SharedModule,
+    AuthRoutingModule
   ],
-  providers: [AmplifyService],
-  declarations: [SignupComponent, SigninComponent, ConfirmComponent, ResetpasswordComponent, ForgotpasswordComponent]
+  providers: [],
+  declarations: [RegisterComponent, LoginComponent, ConfirmComponent, ResetpasswordComponent, ForgotpasswordComponent]
 })
 export class AuthModule { }

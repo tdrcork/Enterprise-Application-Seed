@@ -21,9 +21,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const username = form.value.username;
-    const email = form.value.email;
     const password = form.value.password;
-    this.store.dispatch(new AuthActions.START_REGISTRATION(username: username, email: email, password: password));
+    this.store.dispatch(new AuthActions.StartLogin({email: username, password: password}));
   }
 
 }

@@ -2,26 +2,19 @@ import { Action } from '@ngrx/store';
 
 /* Creating a New User */
 export const START_REGISTRATION = 'START_REGISTRATION'; // effect
-export const START_CONFIRMATION = 'START_CONFIRMATION'; // effect
 export const REGISTER = 'REGISTER';
+
+export const START_CONFIRMATION = 'START_CONFIRMATION'; // effect
 export const CONFIRM = 'CONFIRM';
 
-/* Logging In/Out Current User */
 export const START_LOGIN = 'START_LOGIN'; // effect
 export const LOGIN = 'LOGIN';
+
+export const START_RESET = 'START_RESET'; // effect
+export const FORGOTTEN_PASSWORD = 'FORGOTTEN_PASSWORD';
+
 export const LOGOUT = 'LOGOUT';
 
-/* MultiFactor Authentication */
-export const START_MFA_LOGIN = 'START_MFA_LOGIN'; // effect
-export const CHECK_ENABLE_MFA = 'CHECK_ENABLE_MFA';
-export const MFA_LOGIN = 'MFA_LOGIN';
-
-/* Password reset/forgotten/change */
-export const START_RESET = 'START_RESET';
-export const FORGOTTEN_PASSWORD = 'FORGOTTEN_PASSWORD';
-export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
-
-/* Token for auth */
 export const SET_TOKEN = 'SET_TOKEN';
 
 
@@ -70,37 +63,22 @@ export class Logout implements Action {
 }
 
 
-
-/* MultiFactor Authentication */
-export class StartMFALogin implements Action {
-    readonly type = START_MFA_LOGIN;
-    constructor(public payload: {code: string, confirm: string}) {}
-}
-export class CheckEnableMFA implements Action {
-    readonly type = CHECK_ENABLE_MFA;
-}
-export class MFASignin implements Action {
-    readonly type = MFA_LOGIN;
-}
-
 export class SetToken implements Action {
     readonly type = SET_TOKEN;
 
     constructor(public payload: string) {}
 }
 
-export type AuthActions = Register |
-                          Confirm |
-                          Login |
-                          Logout |
-                          CheckEnableMFA |
-                          MFASignin |
-                          SetToken |
-                          StartLogin |
-                          StartConfirmation |
-                          StartRegistration |
-                          StartMFALogin |
-                          ForgottenPassword;
+export type AuthActions =
+  Register
+| Confirm
+| Login
+| Logout
+| SetToken
+| StartLogin
+| StartConfirmation
+| StartRegistration
+| ForgottenPassword;
 
 
 

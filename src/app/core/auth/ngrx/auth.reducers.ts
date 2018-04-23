@@ -1,22 +1,19 @@
 import * as AuthActions from './auth.actions';
-import { Action } from '@ngrx/store';
 
 export interface State {
-    authenticated:  boolean;
-    token: string;
     registered: boolean;
-    mfaEnabled: boolean;
-    mfAuthenticated: boolean;
+    confirmed: boolean;
+    authenticated:  boolean;
     forgotPassword: boolean;
+    token: string;
 }
 
 const initialState: State = {
-    authenticated: false,
-    token: null,
     registered: false,
-    mfaEnabled: false,
-    mfAuthenticated: false,
-    forgotPassword: false
+    confirmed: false,
+    authenticated: false,
+    forgotPassword: false,
+    token: null,
 };
 
 
@@ -26,23 +23,36 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
             return {
                 ...state,
                 registered: true
-            }
+            };
         case (AuthActions.CONFIRM):
-            ...state,
-            confirmed: true;
-            return state;
+            return {
+                ...state,
+                confirmed: true
+            };
         case (AuthActions.LOGIN):
-            ...state,
-            authenticated: true;
-            return state;
+            return {
+                ...state,
+                authenticated: true,
+                forgotPassword: false
+            };
         case (AuthActions.LOGOUT):
-            ...state,
-            token: null,
-            confirmed: false,
-            registered: false,
-            authenticated: false,
-            mfAuthenticated: false;
-            return state;
+            return {
+                ...state,
+                token: null,
+                confirmed: false,
+                registered: false,
+                authenticated: false,
+            };
+        case (AuthActions.SET_TOKEN):
+            return {
+                ...state,
+                token: action.payload
+            };
+        case (AuthActions.FORGOTTEN_PASSWORD):
+            return {
+                ...state,
+                forgotPassword: true
+            };
         default:
             return state;
     }

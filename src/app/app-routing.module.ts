@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { StaticModule } from './pages/static/static.module';
 import { HomeComponent } from './pages/static/home/home.component';
 
-const routes: Routes = [
+const appRoutes: Routes = [
   { path: '', component:  HomeComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

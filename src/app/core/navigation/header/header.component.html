@@ -2,31 +2,25 @@
   fxLayoutAlign="center center"
   class="header">
 
-    <div fxFlex routerLink="/">
-        <button mat-button><h1>CAMERON SEED</h1></button>
-    </div>
-
-    <div fxFlex></div>
-
     <div fxHide.gt-xs>
         <button mat-icon-button>
             <mat-icon>more_vert</mat-icon>
         </button>
     </div>
 
-    <div fxHide.lt-sm>
-        <a routerLinkActive="active" mat-button>
-        text</a>
-
-        <a routerLinkActive="active" mat-button>
-        text</a>
-
-        <a routerLinkActive="active" mat-button>
-        text</a>
-
-        <a routerLinkActive="active" color="primary" mat-raised-button>
-        text</a>
+    <div fxFlex routerLink="/">
+        <button mat-button><h1>CAMERON SEED</h1></button>
     </div>
+
+    <div fxFlex></div>
+
+
+    <ng-template [ngIf]="!(authState | async).authenticated">
+        <div fxHide.lt-sm >
+            <a routerLinkActive routerLink="/login" mat-button>Login</a>
+            <a routerLinkActive routerLink="/register" mat-button>Register</a>
+        </div>
+    </ng-template>
 
 </mat-toolbar>
 

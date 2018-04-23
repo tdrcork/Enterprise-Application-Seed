@@ -7,14 +7,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { AmplifyService } from 'aws-amplify-angular';
-import { Auth } from 'aws-amplify';
 
-
+@Injectable()
 export class AuthEffects {
 
     constructor(private actions$: Actions, private router: Router, private amplifyService: AmplifyService) {
-        this.amplifyService.auth = Auth;
+        this.amplifyService = amplifyService;
     }
+
 
     @Effect()
     authLogin = this.actions$
@@ -23,10 +23,10 @@ export class AuthEffects {
             return action.payload;
         })
         .switchMap((authData: {email: string, password: string}) => {
-            return fromPromise(Auth.signIn(authData.email, authData.password));
+            return fromPromise(this.amplifyService.auth().signIn(authData.email, authData.password));
         })
         .switchMap(() => {
-            return fromPromise(Auth.currentAuthenticatedUser());
+            return fromPromise(this.amplifyService.auth().currentAuthenticatedUser());
         })
         .mergeMap((token: string) => {
             return [
@@ -53,14 +53,7 @@ export class AuthEffects {
             return action.payload;
         })
         .switchMap((authData: {username: string, password: string, email: string}) => {
-            return fromPromise(Auth.signUp({
-                                                authData.username,
-                                                authData.password,
-                                                attributes: {
-                                                    authData.email
-                                                },
-                                                validationData: []
-                                            }));
+            return fromPromise(this.amplifyService.auth().signUp(authData.username, authData.password));
         })
         .mergeMap(() => {
             return [
@@ -79,10 +72,10 @@ export class AuthEffects {
             return action.payload;
         })
         .switchMap((authData: {username: string, code: string}) => {
-            return fromPromise(Auth.confirmSignUp(authData.username, authData.code));
+            return fromPromise(this.amplifyService.auth().confirmSignUp(authData.username, authData.code));
         })
         .switchMap(() => {
-            return fromPromise(Auth.currentAuthenticatedUser());
+            return fromPromise(this.amplifyService.auth().currentAuthenticatedUser());
         })
         .mergeMap((token: string) => {
             return [
@@ -109,7 +102,7 @@ export class AuthEffects {
             return action.payload;
         })
         .switchMap((authData: {username: string}) => {
-            return fromPromise(Auth.forgotPassword(authData.username));
+            return fromPromise(this.amplifyService.auth().forgotPassword(authData.username));
         })
         .mergeMap(() => {
             return [
@@ -118,6 +111,8 @@ export class AuthEffects {
                 },
             ];
         });
+
+
 
 
     // TODO: SET UP THE REST OF THE METHODS FROM THE SERVICE IN HERE.  
