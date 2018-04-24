@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+
 import { AuthRoutingModule } from './auth-routing.module';
 
 

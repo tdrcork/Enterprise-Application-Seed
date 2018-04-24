@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import * as fromApp from '../../../ngrx/app.reducer';
@@ -11,6 +11,7 @@ import * as AuthActions from '../../ngrx/auth.actions';
 })
 
 export class RegisterComponent implements OnInit {
+  @ViewChild('registerForm') form: NgForm;
 
   constructor(
     private store: Store<fromApp.AppState>
@@ -19,10 +20,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
-    const username = form.value.username;
-    const email = form.value.email;
-    const password = form.value.password;
+  onSubmit() {
+    const username = this.form.value.username;
+    const email = this.form.value.email;
+    const password = this.form.value.password;
     this.store.dispatch(new AuthActions.StartRegistration({username: username, password: password, email: email}));
   }
 }

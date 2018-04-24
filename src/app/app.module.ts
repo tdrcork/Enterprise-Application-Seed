@@ -43,7 +43,8 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
     AmplifyAngularModule,
-    StoreRouterConnectingModule
+    StoreRouterConnectingModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

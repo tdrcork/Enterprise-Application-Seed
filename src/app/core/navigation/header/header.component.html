@@ -17,8 +17,8 @@
 
     <ng-template [ngIf]="!(authState | async).authenticated">
         <div fxHide.lt-sm >
-            <a routerLinkActive routerLink="/login" mat-button>Login</a>
-            <a routerLinkActive routerLink="/register" mat-button>Register</a>
+            <a routerLinkActive routerLink="login" mat-button>Login</a>
+            <a routerLinkActive routerLink="register" mat-button>Register</a>
         </div>
     </ng-template>
 
