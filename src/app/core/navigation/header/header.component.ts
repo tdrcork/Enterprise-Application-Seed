@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as fromApp from '../../ngrx/app.reducer';
 import * as fromAuth from '../../auth/ngrx/auth.reducers';
@@ -15,6 +15,8 @@ import { shiftInitState } from '@angular/core/src/view';
 })
 export class HeaderComponent implements OnInit {
   authState: Observable<fromAuth.State>;
+  @Output() sidenavToggle = new EventEmitter<void>();
+  isOpen = false;
 
   constructor(private store: Store<fromApp.AppState>) { }
 
@@ -25,6 +27,19 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.store.dispatch(new AuthActions.Logout());
   }
+
+  onToggleSidenav() {
+    this.sidenavToggle.emit();
+    console.log(this.isOpen);
+    if (this.isOpen === false) {
+      this.isOpen = true;
+    } else {
+      this.isOpen = false;
+    }
+    console.log(this.isOpen);
+  }
+
+
 
 
 }

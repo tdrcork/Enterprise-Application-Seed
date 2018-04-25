@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../scss/variables';
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import './variables';
+@import "~@angular/material/theming";
+@import './typography.scss';
+@import './themes.scss';
+@include angular-material-typography($responsive-typograpy);
 
 /* Reset */
 html, body, div {
@@ -19,6 +22,9 @@ body {
   flex-direction: column;
 }
 
+mat-sidenav {
+  width: 100vw;
+}
 
 /* layout */
 .full-page {

@@ -28,12 +28,14 @@ import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
 
 
 import { environment } from '../environments/environment';
+import { SidenavComponent } from './core/navigation/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,

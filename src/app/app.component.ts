@@ -6,12 +6,7 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  template:
-  `
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
-  `
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   authState: Observable<fromAuth.State>;

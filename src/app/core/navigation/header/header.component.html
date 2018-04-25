@@ -2,14 +2,8 @@
   fxLayoutAlign="center center"
   class="header">
 
-    <div fxHide.gt-xs>
-        <button mat-icon-button>
-            <mat-icon>more_vert</mat-icon>
-        </button>
-    </div>
-
     <div fxFlex routerLink="/">
-        <button mat-button><h1>CAMERON SEED</h1></button>
+        <button mat-button><h1>CAMERONS SEED</h1></button>
     </div>
 
     <div fxFlex></div>
@@ -22,6 +16,12 @@
         </div>
     </ng-template>
 
-</mat-toolbar>
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon *ngIf="!this.isOpen">menu</mat-icon>
+            <mat-icon *ngIf="this.isOpen">clear</mat-icon>
+        </button>
+    </div>
 
+</mat-toolbar>
 
