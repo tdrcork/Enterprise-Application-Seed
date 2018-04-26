@@ -38,7 +38,7 @@ import { SidenavComponent } from './core/navigation/sidenav/sidenav.component';
     SidenavComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'universal-app'}),
     AppRoutingModule,
     StaticModule,
     SharedModule,
