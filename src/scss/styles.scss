@@ -5,6 +5,25 @@
 @import './themes.scss';
 @include angular-material-typography($responsive-typograpy);
 
+/* Responsive Typography */
+@media only screen and (max-width: $breakpoint-small) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: $breakpoint-small) and (max-width: $breakpoint-large) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: $breakpoint-large) {
+  html {
+    font-size: 20px;
+  }
+}
+
 /* Reset */
 html, body, div {
   border: 0;
