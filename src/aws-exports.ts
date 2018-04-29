@@ -7,24 +7,23 @@
 // AWS Mobile Hub Project Constants
 const awsmobile = {
     'aws_app_analytics': 'enable',
-    'aws_cognito_identity_pool_id': 'us-east-1:fd22879c-f6b0-4767-b45c-06f332b6ba40',
+    'aws_cognito_identity_pool_id': 'us-east-1:95ea9a79-bd2b-4509-9b5d-9bc73a6d206e',
     'aws_cognito_region': 'us-east-1',
     'aws_content_delivery': 'enable',
-    'aws_content_delivery_bucket': 'start-hosting-mobilehub-260218426',
+    'aws_content_delivery_bucket': 'freelaneseed-hosting-mobilehub-1585871626',
     'aws_content_delivery_bucket_region': 'us-east-1',
     'aws_content_delivery_cloudfront': 'enable',
-    'aws_content_delivery_cloudfront_domain': 'd24q8vobil412k.cloudfront.net',
-    'aws_mobile_analytics_app_id': '9e614a53962a4f5f92dcc00824821821',
+    'aws_content_delivery_cloudfront_domain': 'd3grdapob1crvd.cloudfront.net',
+    'aws_mobile_analytics_app_id': 'c6f045a1bea14d03bce36a05a52b3fb9',
     'aws_mobile_analytics_app_region': 'us-east-1',
-    'aws_project_id': '683eb627-5773-4d96-a5fb-8e8192822861',
-    'aws_project_name': 'start-2018-04-23-13-07-58',
+    'aws_project_id': 'dc38ed9a-85fb-4375-8d88-2820e524cb3e',
+    'aws_project_name': 'freelane_seed',
     'aws_project_region': 'us-east-1',
-    'aws_resource_name_prefix': 'start-mobilehub-260218426',
+    'aws_resource_name_prefix': 'freelaneseed-mobilehub-1585871626',
     'aws_sign_in_enabled': 'enable',
     'aws_user_pools': 'enable',
-    'aws_user_pools_id': 'us-east-1_pvPR6e2CQ',
-    'aws_user_pools_mfa_type': 'ON',
-    'aws_user_pools_web_client_id': '2ooqdsrctcq3f8c3gi9jmg7iqf',
+    'aws_user_pools_id': 'us-east-1_zKcYrkMNx',
+    'aws_user_pools_web_client_id': '5ocmg5b84qa5di1p7ioeit40o3',
 }
 
 export default awsmobile;

@@ -1,50 +1,108 @@
 <mat-toolbar fxLayout fxLayoutAlign="center center" class="page-title" color="primary">
-  <h1 class="mat-headline">Sign In</h1>
+  <h1 class="mat-headline">Login</h1>
 </mat-toolbar>
 
-<div fxLayout="row wrap">
-  <div fxFlex class="side-panel">
-
-  </div>
-
-  <div fxFlex class="main-content">
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" fxLayout fxLayoutAlign="center stretch">
-      <div fxFlex fxLayout="column" fxLayoutAlign="center stretch">
-
-        <mat-form-field fxFlex>
-          <input matInput
-            type="text"
-            id="username"
-            name="username"
-            ngModel
-            placeholder="username or email"
-            required>
-        </mat-form-field>
-
-        <mat-form-field fxFlex>
-          <input matInput
-            type="password"
-            id="password"
-            name="password"
-            ngModel
-            placeholder="password"
-            required>
-        </mat-form-field>
-
-        <button type="submit" mat-raised-button color="primary">Submit</button>
-
-        <div fxLayout="row wrap" fx-layout-align="center center" class="extra-options">
-          <a fxFlex mat-button (click)="openForgotDialog()">Forgot Password</a>
-          <a fxFlex mat-button routerLink="/register">Create an Account</a>
-        </div>
-      </div>
-
-    </form>
-  </div>
-
-  <div fxFlex class="side-panel">
-
-  </div>
+<div fxLayout="row nowrap" fxLayoutAlign="center center" *ngIf="(uiState | async).isLoading" fxShow>
+  <div fxFlex></div>
+<!-- =========================================================================================================================================== -->
+  <mat-spinner></mat-spinner>
+<!-- =========================================================================================================================================== -->
+  <div fxFlex></div>
 </div>
+
+<div *ngIf="!(authState | async).forgotPassword">
+<div *ngIf="!loading">
+<div fxLayout="row nowrap" fxLayoutAlign="space-between stretch"> <!-- Login Form -->
+  <div fxFlex="1 2 20%"></div>
+  <div fxFlex fxLayout="column" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+    <h3 fxFlex>Login to your Account</h3>
+
+    <form [formGroup]="loginForm" fxLayout="column">
+      <mat-form-field fxFlex>
+        <input formControlName="username" matInput placeholder="username or email" type="text">
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input formControlName="password" matInput placeholder="password" type="password">
+      </mat-form-field>
+    </form>
+
+    <button fxFlex [disabled]="!loginForm.valid" mat-raised-button (click)="onLogin()">Login</button>
+
+    <div fxLayout fxLayoutGap="20px">
+      <button fxFlex mat-button (click)="onForgot()">Forgot Password</button>
+      <a fxFlex mat-button routerLink="/register">Register</a>
+    </div>
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%"></div>
+</div>
+</div>
+</div>
+
+
+<div *ngIf="(authState | async).forgotPassword">
+<div *ngIf="!(authState | async).emailSent">
+<div *ngIf="!(uiState | async).isLoading">
+<div fxLayout="row nowrap"
+     fxLayoutAlign="space-between stretch" 
+     *ngIf="(authState | async).forgotPassword && !(authState | async).emailSent && !(uiState | async).isLoading"> <!-- Send Password Reset Email -->
+  <div fxFlex="1 2 20%"></div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+    <h3 fxFlex>Enter your username or email to receive a password reset code</h3>
+
+    <form [formGroup]="sendForgotForm" flexLayout="column">
+      <mat-form-field fxFlex>
+        <input formControlName="username" matInput placeholder="username or email" type="text">
+      </mat-form-field>
+    </form>
+
+    <button fxFlex mat-raised-button (click)="onSendForgot()" [disabled]="!sendForgotForm.invalid">Send Email</button>
+
+    <div fxFlex></div>
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div fxLayout="row nowrap" fxLayoutAlign="space-between stretch" *ngIf="(authState | async).forgotPassword && (authState | async).emailSent && !(uiState | async).isLoading"> <!-- Reset Password Form -->
+  <div fxFlex="1 2 20%"></div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+    <h3 fxFlex>Use the code from the reset email and set a new Password</h3>
+
+    <form [formGroup]="submitForgotForm" fxLayout="column">
+      <mat-form-field fxFlex>
+        <input formControlName="username" matInput readonly placeholder="Username or Email" type="text">
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input formControlName="code" matInput placeholder="code you were emailed" type="number">
+      </mat-form-field>
+
+      <mat-form-field fxFlex fxLayout="column">
+        <input formControlName="password" matInput placeholder="new password" type="password">
+        <mat-hint fxFlex>must include a number, uppercase letter, and special character</mat-hint>
+        <mat-hint fxFlex>must be at least 8 characters</mat-hint>
+      </mat-form-field>
+    </form>
+
+    <button fxFlex mat-raised-button (click)="onSubmitForgot()" [disabled]="!submitForgotForm.invalid">Reset Password</button>
+
+    <div fxFlex></div>
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%"></div>
+</div>
+
+
+
 
 

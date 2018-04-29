@@ -13,6 +13,8 @@ export const LOGIN = 'LOGIN';
 export const START_RESET = 'START_RESET'; // effect
 export const FORGOTTEN_PASSWORD = 'FORGOTTEN_PASSWORD';
 
+export const EMAIL_SENT = 'EMAIL_SENT';
+
 export const LOGOUT = 'LOGOUT';
 
 export const SET_TOKEN = 'SET_TOKEN';
@@ -21,12 +23,12 @@ export const SET_TOKEN = 'SET_TOKEN';
 /* Creating a New User */
 export class StartRegistration implements Action {
     readonly type = START_REGISTRATION;
-    constructor(public payload: {username: string, password: string, email: string}) {}
+    constructor(public payload: {email: string, password: string}) {}
 }
 
 export class StartConfirmation implements Action {
     readonly type = START_CONFIRMATION;
-    constructor(public payload: {username: string, code: string}) {}
+    constructor(public payload: {email: string, code: string}) {}
 }
 
 export class StartReset implements Action {
@@ -47,6 +49,9 @@ export class ForgottenPassword implements Action {
     readonly type = FORGOTTEN_PASSWORD;
 }
 
+export class EmailSent implements Action {
+    readonly type = EMAIL_SENT;
+}
 
 /* Login/Logout */
 export class StartLogin implements Action {
@@ -78,7 +83,8 @@ export type AuthActions =
 | StartLogin
 | StartConfirmation
 | StartRegistration
-| ForgottenPassword;
+| ForgottenPassword
+| EmailSent;
 
 
 

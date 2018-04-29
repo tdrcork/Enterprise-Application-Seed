@@ -52,8 +52,8 @@ export class AuthEffects {
         .map((action: AuthActions.StartLogin) => {
             return action.payload;
         })
-        .switchMap((authData: {username: string, password: string, email: string}) => {
-            return fromPromise(this.amplifyService.auth().signUp(authData.username, authData.password));
+        .switchMap((authData: { email: string, password: string}) => {
+            return fromPromise(this.amplifyService.auth().signUp(authData.email, authData.password));
         })
         .mergeMap(() => {
             return [
@@ -71,8 +71,8 @@ export class AuthEffects {
         .map((action: AuthActions.StartConfirmation) => {
             return action.payload;
         })
-        .switchMap((authData: {username: string, code: string}) => {
-            return fromPromise(this.amplifyService.auth().confirmSignUp(authData.username, authData.code));
+        .switchMap((authData: {email: string, code: string}) => {
+            return fromPromise(this.amplifyService.auth().confirmSignUp(authData.email, authData.code));
         })
         .switchMap(() => {
             return fromPromise(this.amplifyService.auth().currentAuthenticatedUser());

@@ -6,6 +6,7 @@ export interface State {
     authenticated:  boolean;
     forgotPassword: boolean;
     token: string;
+    emailSent: boolean;
 }
 
 const initialState: State = {
@@ -13,6 +14,7 @@ const initialState: State = {
     confirmed: false,
     authenticated: false,
     forgotPassword: false,
+    emailSent: false,
     token: null,
 };
 
@@ -33,7 +35,8 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
             return {
                 ...state,
                 authenticated: true,
-                forgotPassword: false
+                forgotPassword: false,
+                emailSent: false
             };
         case (AuthActions.LOGOUT):
             return {
@@ -53,7 +56,17 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 ...state,
                 forgotPassword: true
             };
+        case (AuthActions.EMAIL_SENT):
+            return {
+                ...state,
+                emailSent: true,
+            };
         default:
             return state;
     }
 }
+/* 
+export const getForgotPassword = (state: State) => state.forgotPassword;
+export const getEmailSent = (state: State) => state.emailSent;
+export const getIsAuthenticated = (state: State) => state.authenticated;
+ */

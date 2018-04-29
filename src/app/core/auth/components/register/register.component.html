@@ -2,64 +2,25 @@
   <h1 class="mat-headline">Register</h1>
 </mat-toolbar>
 
-<div fxLayout="row">
-  <div fxFlex class="side-panel"></div>
 
-  <div fxFlex class="main-content">
-    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" fxLayout fxLayoutAlign="center center">
-      <div fxFlex fxLayout="column" fxLayoutAlign="center stretch">
+<div fxLayout="row nowrap" fxLayoutAlign="space-between stretch"> <!-- Login Form -->
+  <div fxFlex="1 2 20%"></div>
+  <div fxFlex fxLayout="column" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+    <h3 fxFlex>Login to your Account</h3>
 
-        <mat-form-field fxFlex> <!-- username -->
-            <input matInput
-              type="text"
-              id="username"
-              name="username"
-              ngModel
-              placeholder="username"
-              required>
-        </mat-form-field>
+    <form [formGroup]="registerForm" fxLayout="column">
+      <mat-form-field fxFlex>
+        <input formControlName="email" matInput placeholder="email" type="text">
+      </mat-form-field>
 
-        <mat-form-field fxFlex> <!-- email -->
-          <input matInput
-            type="text"
-            id="email"
-            name="email"
-            ngModel
-            placeholder="email"
-            required>
-        </mat-form-field>
-
-        <mat-form-field fxFlex> <!-- password -->
-          <input matInput
-            type="password"
-            id="password"
-            name="password"
-            ngModel
-            placeholder="password"
-            required>
-        </mat-form-field>
-        
-        <button type="submit" mat-raised-button color="primary">Submit</button>
-
-      </div>
+      <mat-form-field fxFlex>
+        <input formControlName="password" matInput placeholder="password" type="password">
+      </mat-form-field>
     </form>
 
-    <div *ngIf="false">
-      <h2>An email has been sent with a confirmation code.</h2>
-      <form>
-        <mat-form-field fxFlex>
-          <input mat-input
-            type="password"
-            id="code"
-            name="code"
-            ngModel
-            placeholder="Confirmation Code"
-            required>
-        </mat-form-field>
-      </form>
-    </div>
+    <button fxFlex [disabled]="!loginForm.valid" mat-raised-button (click)="onRegister()">Register</button>
+<!-- =========================================================================================================================================== -->
   </div>
-
-  <div fxFlex class="side-panel"></div>
+  <div fxFlex="1 2 20%"></div>
 </div>
-
