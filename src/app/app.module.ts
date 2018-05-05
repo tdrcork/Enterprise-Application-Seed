@@ -1,34 +1,34 @@
-/* Required */
+/* Required / Angular Specific / unchanging */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-/* Components */
-import { HeaderComponent } from './core/navigation/header/header.component';
-import { FooterComponent } from './core/navigation/footer/footer.component';
-
-/* Modules */
-import { SharedModule } from './core/shared/shared.module';
-import { StaticModule } from './pages/static/static.module';
-
-/* Authentication */
-import { AuthModule } from '../app/core/auth/auth.module';
-import { AuthEffects } from './core/auth/ngrx/auth.effects';
-
-/* NGRX */
-import { StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store'; // ngrx
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './core/ngrx/app.reducer';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './app.reducer'; // my reducer
 
-/* AWS */
-import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular';
+import {AmplifyService, AmplifyAngularModule } from 'aws-amplify-angular'; // aws
 
+/* Core */
+import { AuthService } from '../app/core/auth/auth.service'; // auth
+import { AuthModule } from '../app/core/auth/auth.module';
+import { AuthEffects } from './core/auth/state/auth.effects';
+import { PermissionsService } from './core/permissions/permissions.service'; // permissions
 
-import { environment } from '../environments/environment';
-import { SidenavComponent } from './core/navigation/sidenav/sidenav.component';
+import { SharedModule } from './core/shared/shared.module'; // ui
+
+/* Navigation */
+import { HeaderComponent } from './navigation/header/header.component';
+import { FooterComponent } from './navigation/footer/footer.component';
+import { SidenavComponent } from './navigation/sidenav/sidenav.component';
+
+/* Modules */
+import { StaticModule } from './pages_static/static.module';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { SidenavComponent } from './core/navigation/sidenav/sidenav.component';
     SidenavComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'universal-app'}),
+    BrowserModule,
     AppRoutingModule,
     StaticModule,
     SharedModule,
@@ -48,7 +48,10 @@ import { SidenavComponent } from './core/navigation/sidenav/sidenav.component';
     StoreRouterConnectingModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    PermissionsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,107 +2,34 @@
   <h1 class="mat-headline">Login</h1>
 </mat-toolbar>
 
-<div fxLayout="row nowrap" fxLayoutAlign="center center" *ngIf="(uiState | async).isLoading" fxShow>
-  <div fxFlex></div>
+<div fxLayout="row nowrap"> <!-- Login Form -->
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+  <div fxFlex fxLayout="row wrap" class="full-page" fxLayoutGap="10px">
 <!-- =========================================================================================================================================== -->
-  <mat-spinner></mat-spinner>
-<!-- =========================================================================================================================================== -->
-  <div fxFlex></div>
-</div>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-title fxFlex>Login to your Account</mat-card-title>
 
-<div *ngIf="!(authState | async).forgotPassword">
-<div *ngIf="!loading">
-<div fxLayout="row nowrap" fxLayoutAlign="space-between stretch"> <!-- Login Form -->
-  <div fxFlex="1 2 20%"></div>
-  <div fxFlex fxLayout="column" fxLayoutGap="10px">
-<!-- =========================================================================================================================================== -->
-    <h3 fxFlex>Login to your Account</h3>
+    <mat-card-content>
+        <form [formGroup]="loginForm" fxLayout="column">
+          <mat-form-field fxFlex>
+            <input formControlName="username" matInput placeholder="username or email" type="text">
+          </mat-form-field>
+    
+          <mat-form-field fxFlex>
+            <input formControlName="password" matInput placeholder="password" type="password">
+          </mat-form-field>
+        </form>
+    </mat-card-content>
 
-    <form [formGroup]="loginForm" fxLayout="column">
-      <mat-form-field fxFlex>
-        <input formControlName="username" matInput placeholder="username or email" type="text">
-      </mat-form-field>
-
-      <mat-form-field fxFlex>
-        <input formControlName="password" matInput placeholder="password" type="password">
-      </mat-form-field>
-    </form>
-
-    <button fxFlex [disabled]="!loginForm.valid" mat-raised-button (click)="onLogin()">Login</button>
+    <mat-card-actions fxLayout>
+        <button mat-button>Forgot Password</button>
+    </mat-card-actions>
 
     <div fxLayout fxLayoutGap="20px">
-      <button fxFlex mat-button (click)="onForgot()">Forgot Password</button>
-      <a fxFlex mat-button routerLink="/register">Register</a>
+      <button fxFlexFill [disabled]="!loginForm.valid" mat-raised-button color="primary" (click)="onLogin()">Login</button>
     </div>
+  </mat-card>
 <!-- =========================================================================================================================================== -->
   </div>
-  <div fxFlex="1 2 20%"></div>
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
 </div>
-</div>
-</div>
-
-
-<div *ngIf="(authState | async).forgotPassword">
-<div *ngIf="!(authState | async).emailSent">
-<div *ngIf="!(uiState | async).isLoading">
-<div fxLayout="row nowrap"
-     fxLayoutAlign="space-between stretch" 
-     *ngIf="(authState | async).forgotPassword && !(authState | async).emailSent && !(uiState | async).isLoading"> <!-- Send Password Reset Email -->
-  <div fxFlex="1 2 20%"></div>
-  <div fxFlex fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
-<!-- =========================================================================================================================================== -->
-    <h3 fxFlex>Enter your username or email to receive a password reset code</h3>
-
-    <form [formGroup]="sendForgotForm" flexLayout="column">
-      <mat-form-field fxFlex>
-        <input formControlName="username" matInput placeholder="username or email" type="text">
-      </mat-form-field>
-    </form>
-
-    <button fxFlex mat-raised-button (click)="onSendForgot()" [disabled]="!sendForgotForm.invalid">Send Email</button>
-
-    <div fxFlex></div>
-<!-- =========================================================================================================================================== -->
-  </div>
-  <div fxFlex="1 2 20%"></div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-<div fxLayout="row nowrap" fxLayoutAlign="space-between stretch" *ngIf="(authState | async).forgotPassword && (authState | async).emailSent && !(uiState | async).isLoading"> <!-- Reset Password Form -->
-  <div fxFlex="1 2 20%"></div>
-  <div fxFlex fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
-<!-- =========================================================================================================================================== -->
-    <h3 fxFlex>Use the code from the reset email and set a new Password</h3>
-
-    <form [formGroup]="submitForgotForm" fxLayout="column">
-      <mat-form-field fxFlex>
-        <input formControlName="username" matInput readonly placeholder="Username or Email" type="text">
-      </mat-form-field>
-
-      <mat-form-field fxFlex>
-        <input formControlName="code" matInput placeholder="code you were emailed" type="number">
-      </mat-form-field>
-
-      <mat-form-field fxFlex fxLayout="column">
-        <input formControlName="password" matInput placeholder="new password" type="password">
-        <mat-hint fxFlex>must include a number, uppercase letter, and special character</mat-hint>
-        <mat-hint fxFlex>must be at least 8 characters</mat-hint>
-      </mat-form-field>
-    </form>
-
-    <button fxFlex mat-raised-button (click)="onSubmitForgot()" [disabled]="!submitForgotForm.invalid">Reset Password</button>
-
-    <div fxFlex></div>
-<!-- =========================================================================================================================================== -->
-  </div>
-  <div fxFlex="1 2 20%"></div>
-</div>
-
-
-
-
-

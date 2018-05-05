@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { NgForm } from '@angular/forms';
-import * as fromApp from '../../../ngrx/app.reducer';
-import * as AuthActions from '../../ngrx/auth.actions';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,18 +9,44 @@ import * as AuthActions from '../../ngrx/auth.actions';
 })
 
 export class RegisterComponent implements OnInit {
-  @ViewChild('registerForm') form: NgForm;
+
+  registerForm: FormGroup;
+  confirmForm: FormGroup;
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private formBuilder: FormBuilder,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      'username': ['', Validators.required],
+      'email': ['', Validators.required],
+      'password': [null, Validators.required]
+    });
+
+    this.confirmForm = this.formBuilder.group({
+      'code': ['', Validators.required]
+    });
   }
 
-  onSubmit(form: NgForm) {
-    const email = this.form.value.email;
-    const password = this.form.value.password;
-    this.store.dispatch(new AuthActions.StartRegistration({email: email, password: password}));
+  onRegister() {
+    const params = {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+      attributes: {
+        email: this.registerForm.value.email,
+      }
+    };
+    this.auth.registerUser(params);
+  }
+
+  onConfirm() {
+    const params = {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+      code: this.confirmForm.value.code
+    };
+    this.auth.confirmUser(params);
   }
 }

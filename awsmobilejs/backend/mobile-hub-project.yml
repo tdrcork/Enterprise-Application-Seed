@@ -1,11 +1,60 @@
 --- !com.amazonaws.mobilehub.v0.Project 
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      permissionsCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: permissionsCRUD
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /permissions: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/permissions-20180503162151.zip
+            description: 'Handler for calls to resource path : /permissions/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: aqLy85yj5fX7hw41K3bhFs/VDDrPrLdWsJ2tiIKwUDw=
+            memorySize: '128'
+            modified: '2018-05-03T21:22:37.382+0000'
+            name: permissions
+            runtime: nodejs6.10
+            timeout: '3'
+            version: VICZqOKlklDmikLM0yki1Aa_mHCOJwQk
+          '/permissions/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/permissions-20180503162151.zip
+            description: 'Handler for calls to resource path : /permissions/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: aqLy85yj5fX7hw41K3bhFs/VDDrPrLdWsJ2tiIKwUDw=
+            memorySize: '128'
+            modified: '2018-05-03T21:22:37.382+0000'
+            name: permissions
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 9BidDOj6VSwb.tMUH.4KlSCT0u6qgQ1s
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
       visibility: public-global
     components:
       release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              clearance: N
+              keys: SS
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-permissions
+            tablePrivacy: private
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
@@ -16,6 +65,16 @@ features:
     components:
       sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
         attributes:
-          user-pool-id: us-east-1_zKcYrkMNx
-name: freelane_seed
+          alias-attributes:
+            - preferred_username
+            - email
+          mfa-configuration: OFF
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
+            min-length: '8'
+            require-lower-case: true
+            require-numbers: true
+            require-symbols: false
+            require-upper-case: true
+name: seed
 region: us-east-1

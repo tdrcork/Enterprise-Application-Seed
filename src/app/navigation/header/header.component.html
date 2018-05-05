@@ -1,0 +1,39 @@
+<mat-toolbar fxLayout
+  fxLayoutAlign="center center"
+  class="header">
+
+    <div fxFlex routerLink="/">
+        <button mat-button><h1>CAMERONS SEED</h1></button>
+    </div>
+
+    <div fxFlex></div>
+
+
+    <ng-template [ngIf]="!(authState | async).authenticated">
+        <div fxHide.lt-md >
+            <a routerLinkActive routerLink="features" mat-button>Features</a>
+            <a routerLinkActive routerLink="architecture" mat-button>Architecture</a>
+            <a routerLinkActive routerLink="usage" mat-button>Usage</a>
+            <a routerLinkActive routerLink="login" mat-button>Login</a>
+            <a routerLinkActive routerLink="register" mat-button>Register</a>
+        </div>
+    </ng-template>
+
+    <ng-template [ngIf]="(authState | async).authenticated">
+        <div fxHide.lt-md>
+            <a routerLinkActive routerLink="features" mat-button>Features</a>
+            <a routerLinkActive routerLink="architecture" mat-button>Architecture</a>
+            <a routerLinkActive routerLink="usage" mat-button>Usage</a>
+            <button mat-button (click)="onLogout()">Logout</button>
+        </div>
+    </ng-template>
+
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon *ngIf="!this.isOpen">menu</mat-icon>
+            <mat-icon *ngIf="this.isOpen">clear</mat-icon>
+        </button>
+    </div>
+
+</mat-toolbar>
+
