@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
-import { SharedModule } from '../core/shared/shared.module';
+import { UIModule } from '../core/ui/ui.module';
 import { FeaturesComponent } from './features/features.component';
 import { ArchitectureComponent } from './architecture/architecture.component';
 import { UsageComponent } from './usage/usage.component';
@@ -15,7 +15,7 @@ import { UsageComponent } from './usage/usage.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    UIModule
   ],
   exports: [
     HomeComponent

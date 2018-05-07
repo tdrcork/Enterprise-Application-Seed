@@ -19,7 +19,7 @@ import { AuthModule } from '../app/core/auth/auth.module';
 import { AuthEffects } from './core/auth/state/auth.effects';
 import { PermissionsService } from './core/permissions/permissions.service'; // permissions
 
-import { SharedModule } from './core/shared/shared.module'; // ui
+import { UIModule } from './core/ui/ui.module'; // ui
 
 /* Navigation */
 import { HeaderComponent } from './navigation/header/header.component';
@@ -41,7 +41,7 @@ import { StaticModule } from './pages_static/static.module';
     BrowserModule,
     AppRoutingModule,
     StaticModule,
-    SharedModule,
+    UIModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
     AmplifyAngularModule,
