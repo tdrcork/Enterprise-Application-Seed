@@ -1,0 +1,155 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="picture-container landing">
+    <h1 class="picture-content">Enterprise Application Seed</h1>
+</div>
+
+
+
+<div fxLayout="row nowrap"> <!-- base -->
+  <div fxFlex.gt-md="1 2 20%"></div>
+  <div fxLayout="row wrap" class="page-chunk">
+<!-- ======================================================================================================================================================================== -->
+
+<!-- ======================================================================================================================================================================== -->
+  </div>
+  <div fxFlex.gt-md="1 2 20%"></div>
+</div>
+
+
+
+
+<div fxLayout="row nowrap"> <!-- list of cards -->
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+  <div fxFlex fxLayout="row wrap" class="row" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+
+    <mat-card *ngFor="let card of cards" class="row-item">
+      <mat-card-title>{{ card.title }}</mat-card-title>
+      <mat-card-content>{{card.description}}</mat-card-content>
+      <mat-card-actions>{{card.actions}}</mat-card-actions>
+    </mat-card>
+
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+</div>
+
+<div fxLayout="row nowrap"> <!-- equal size columns -->
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+  <div fxFlex fxLayout="row nowrap" class="row" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+
+    <div fxFlex fxLayout="column" class="column">
+      <button mat-raised-button class="column-item">Click Me!</button>
+      <button mat-raised-button class="column-item">Click Me!</button>
+      <button mat-raised-button class="column-item">Click Me!</button>
+      <button mat-raised-button class="column-item">Click Me!</button>
+      <button mat-raised-button class="column-item">Click Me!</button>
+    </div>
+
+    <div fxFlex fxLayout="column" class="column">
+      <mat-tab-group>
+        <mat-tab label="a fat tab">
+          <h3>dlajsfdljaf;lsdakf;adsljfd;saj</h3>
+          <p>dalksfjal;djfl;sdja  djlfkasjda;sf  djfklasjd ld jflas;dkf a;lskjflsa;djg;lsadjkglsdkajg;laskjdg;lakajsdg;lkjasgd</p>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+</div>
+
+<div fxLayout="row nowrap"> <!-- one small column, one big--> 
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+  <div fxFlex fxLayout="row nowrap" class="row" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+
+<div fxLayout="column" class="column" fxLayoutGap="5px">
+    <button fxFlex mat-raised-button class="column-item">Click Me!</button>
+    <button fxFlex mat-raised-button class="column-item">Click Me!</button>
+    <button fxFlex mat-raised-button class="column-item">Click Me!</button>
+    <button fxFlex mat-raised-button class="column-item">Click Me!</button>
+
+    <button fxFlex mat-raised-button class="column-item">Click Me!</button>
+  </div>
+    
+
+    <div fxFlex fxLayout="column" class="column">
+      <mat-tab-group>
+        <mat-tab label="a fat tab">
+          <h3>dlajsfdljaf;lsdakf;adsljfd;saj</h3>
+          <p>dalksfjal;djfl;sdja  djlfkasjda;sf  djfklasjd ld jflas;dkf a;lskjflsa;djg;lsadjkglsdkajg;laskjdg;lakajsdg;lkjasgd</p>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+</div>
+
+<div fxLayout="row nowrap"> <!-- create a table --> 
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+  <div fxFlex fxLayout="row nowrap" class="row" fxLayoutGap="10px">
+<!-- =========================================================================================================================================== -->
+    <div fxLayout="column" fxFlexFill class="column">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+
+        <mat-table fxLayout="column" #table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+        
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+            </ng-container>
+        
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+    </div>
+
+
+<!-- =========================================================================================================================================== -->
+  </div>
+  <div fxFlex="1 2 20%" fxHide.lt-md></div>
+</div>
+
+
+<div fxLayout="row nowrap"> <!-- base -->
+  <div fxFlex.gt-md="1 2 20%"></div>
+  <div fxLayout="row wrap" class="page-chunk">
+<!-- ======================================================================================================================================================================== -->
+    <div class="picture-container content-chunk" fxLayout="column">
+
+    </div>
+
+
+
+<!-- ======================================================================================================================================================================== -->
+  </div>
+  <div fxFlex.gt-md="1 2 20%"></div>
+</div>
+
+
+
