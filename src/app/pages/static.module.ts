@@ -5,15 +5,13 @@ import { UIModule } from '../core/ui/ui.module';
 import { FeaturesComponent } from './features/features.component';
 import { ArchitectureComponent } from './architecture/architecture.component';
 import { UsageComponent } from './usage/usage.component';
-import { HelloComponent } from './hello/hello.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     FeaturesComponent,
     ArchitectureComponent,
-    UsageComponent,
-    HelloComponent
+    UsageComponent
   ],
   imports: [
     CommonModule,
